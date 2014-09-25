@@ -138,7 +138,7 @@ Pod::Spec.new do |s|
     s.dependency 'APLKeyboardControls', '~> 0.1.2'
     s.dependency 'MyiOSHelpers/Logic/Blocks', '~> 1.0.3'
     s.dependency 'MyiOSHelpers/Logic/Categories', '~> 1.0.3'
-    s.dependency 'MyiOSViewHelpers/Categories', '~> 1.0.0'
+    s.dependency 'MyiOSViewHelpers/Categories', '~> 1.0.1'
     s.dependency 'JRSwizzle', '~> 1.0'
     s.dependency 'ObjcAssociatedObjectHelpers', '~> 1.2.1'
     
