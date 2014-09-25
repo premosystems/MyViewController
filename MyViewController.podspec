@@ -28,7 +28,7 @@ Pod::Spec.new do |s|
     * Finally, don't worry about the indent, CocoaPods strips it!
     DESC
     
-    s.homepage     = "http://EXAMPLE/MyViewController"
+    s.homepage     = "https://github.com/premosystems/MyViewController"
     # s.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
     
     
@@ -39,7 +39,7 @@ Pod::Spec.new do |s|
     #  Popular ones are 'MIT', 'BSD' and 'Apache License, Version 2.0'.
     #
     
-    s.license      = "MIT (example)"
+    s.license      = "MIT"
     # s.license      = { :type => "MIT", :file => "FILE_LICENSE" }
     
     
@@ -65,7 +65,7 @@ Pod::Spec.new do |s|
     #
     
     # s.platform     = :ios
-    # s.platform     = :ios, "5.0"
+    s.platform     = :ios, "7.0"
     
     #  When using multiple platforms
     # s.ios.deployment_target = "5.0"
@@ -90,7 +90,7 @@ Pod::Spec.new do |s|
     #
     
     s.source_files  = "Classes", "Classes/**/*.{h,m}"
-    s.exclude_files = "Classes/Exclude"
+    # s.exclude_files = "Classes/Exclude"
     
     # s.public_header_files = "Classes/**/*.h"
     
@@ -104,7 +104,7 @@ Pod::Spec.new do |s|
     #
     
     # s.resource  = "icon.png"
-    s.resources = "Resources/*.png", "MyViewController.podspec"
+    s.resources = "MyViewController.podspec"
     
     # s.preserve_paths = "FilesToSave", "MoreFilesToSave"
     
@@ -128,19 +128,17 @@ Pod::Spec.new do |s|
     #  where they will only apply to your library. If you depend on other Podspecs
     #  you can include multiple dependencies to ensure it works.
     
-    # s.requires_arc = true
+    s.requires_arc = true
     
     # s.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
     # s.dependency "JSONKit", "~> 1.4"
     
     s.dependency 'TPKeyboardAvoiding', '~> 1.2.3'
     s.dependency 'ALPValidator', '~> 0.0.3'
-    s.dependency 'CWStatusBarNotification', '~> 2.1.1'
     s.dependency 'APLKeyboardControls', '~> 0.1.2'
-    s.dependency 'MyiOSHelpers/Logic/Blocks', '~> 1.0.0'
-    # s.dependency 'MyiOSHelpers/Logic/Categories', '~> 1.0.0'
-    # s.dependency 'MyiOSViewHelpers/Categories', '~> 1.0.0'
-    s.dependency 'Underscore.m', '~> 0.2.1'
+    s.dependency 'MyiOSHelpers/Logic/Blocks', '~> 1.0.3'
+    s.dependency 'MyiOSHelpers/Logic/Categories', '~> 1.0.3'
+    s.dependency 'MyiOSViewHelpers/Categories', '~> 1.0.0'
     s.dependency 'JRSwizzle', '~> 1.0'
     s.dependency 'ObjcAssociatedObjectHelpers', '~> 1.2.1'
     
