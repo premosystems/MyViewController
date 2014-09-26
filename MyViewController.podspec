@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
     #
     
     s.name         = "MyViewController"
-    s.version      = "0.0.1"
+    s.version      = "0.0.2"
     s.summary      = "Helpful additions for common view controller features. "
     
     s.description  = <<-DESC
@@ -115,6 +115,8 @@ Pod::Spec.new do |s|
     
     # s.library   = "iconv"
     # s.libraries = "iconv", "xml2"
+
+    s.prefix_header_contents = '#import "Underscore.h"', '#ifndef _', '#define _ Underscore', '#endif'
     
     
     # ――― Project Settings ――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -131,10 +133,10 @@ Pod::Spec.new do |s|
     s.dependency 'TPKeyboardAvoiding', '~> 1.2.3'
     s.dependency 'ALPValidator', '~> 0.0.3'
     s.dependency 'APLKeyboardControls', '~> 0.1.2'
-    # s.dependency 'MyiOSHelpers/Logic/Blocks', '~> 1.0.3'
-    # s.dependency 'MyiOSHelpers/Logic/Categories', '~> 1.0.3'
     s.dependency 'MyiOSViewHelpers/Categories', '~> 1.0.1'
     s.dependency 'JRSwizzle', '~> 1.0'
+    s.dependency 'TWMessageBarManager', '~> 1.7.0'
     s.dependency 'ObjcAssociatedObjectHelpers', '~> 1.2.1'
+    s.dependency 'Underscore.m', '~> 0.2.0'
     
 end
