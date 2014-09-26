@@ -20,7 +20,7 @@ Pod::Spec.new do |s|
     s.summary      = "Helpful additions for common view controller features. "
     
     s.description  = <<-DESC
-    Helpful additions for common view controller features. 
+    Helpful additions for common view controller features. Provides a nifty keyboard with controls as well as ordering of text fields, and validation.
     DESC
     
     s.homepage     = "https://github.com/premosystems/MyViewController"
