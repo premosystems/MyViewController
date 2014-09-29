@@ -7,49 +7,32 @@
 //
 
 #import "UIViewController+MyViewControllerAdditions.h"
-#import "JRSwizzle.h"
 #import "ObjcAssociatedObjectHelpers.h"
 #import "MyiOSViewCategories.h"
-#import "MYViewControllerType.h"
 
 @implementation UIViewController (MyViewControllerAdditions)
 
-SYNTHESIZE_ASC_OBJ(validators, setValidators);
+SYNTHESIZE_ASC_OBJ(MY_validators, setMY_validators);
 SYNTHESIZE_ASC_PRIMITIVE(isValid, setIsValid, BOOL);
-SYNTHESIZE_ASC_OBJ(keyboardControls, setKeyboardControls);
-SYNTHESIZE_ASC_PRIMITIVE(validChangeBlock, setValidChangeBlock, MYValidationChangedBlock);
-SYNTHESIZE_ASC_PRIMITIVE(invalidChangeBlock, setInvalidChangeBlock, MYValidationChangedBlock);
-SYNTHESIZE_ASC_PRIMITIVE(waitingForRemoteChangeBlock, setWaitingForRemoteChangeBlock, MYValidationChangedBlock);
+SYNTHESIZE_ASC_OBJ(MY_keyboardControls, setMY_keyboardControls);
+SYNTHESIZE_ASC_PRIMITIVE(MY_validChangeBlock, setMY_validChangeBlock, MYValidationChangedBlock);
+SYNTHESIZE_ASC_PRIMITIVE(MY_invalidChangeBlock, setMY_invalidChangeBlock, MYValidationChangedBlock);
+SYNTHESIZE_ASC_PRIMITIVE(MY_waitingForRemoteChangeBlock, setMY_waitingForRemoteChangeBlock, MYValidationChangedBlock);
 
-+ (void)load {
-    
-    NSError *error = nil;
-    [UIViewController jr_swizzleMethod:@selector(viewDidLoad) withMethod:@selector(MY_viewDidLoad) error:&error];
-    
-    if (error) {
-        NSLog(@"error:%@",[error localizedDescription]);
-    }
-}
+#pragma mark - Setup Methods -
 
-#pragma mark - Method Swizzling
-
-- (void)MY_viewDidLoad {
+- (void) MY_viewControllerSetup {
     
-    if ([self conformsToProtocol:@protocol(MYViewControllerType)]) {
-        self.keyboardControls = [[APLKeyboardControls alloc] initWithInputFields:self.textViewsAndFields];
-        self.keyboardControls.hasPreviousNext = YES;
-        self.validators = [NSMutableArray new];
+    self.MY_keyboardControls = [[APLKeyboardControls alloc] initWithInputFields:self.textViewsAndFields];
+    self.MY_keyboardControls.hasPreviousNext = YES;
+    self.MY_validators = [NSMutableArray new];
+    
+    if ([self.view isKindOfClass:[TPKeyboardAvoidingScrollView class]]) {
         
-        if ([self.view isKindOfClass:[TPKeyboardAvoidingScrollView class]]) {
-            
-            //TPKeyboardAvoidingScrollView *scrollView = (TPKeyboardAvoidingScrollView*)self.view;
-            
-            //scrollView.contentSize = self.view.frame.size;
-        }
+        //TPKeyboardAvoidingScrollView *scrollView = (TPKeyboardAvoidingScrollView*)self.view;
+        
+        //scrollView.contentSize = self.view.frame.size;
     }
-
-    
-    [self MY_viewDidLoad];
 }
 
 #pragma mark - Validation Helpers -
@@ -65,27 +48,27 @@ SYNTHESIZE_ASC_PRIMITIVE(waitingForRemoteChangeBlock, setWaitingForRemoteChangeB
                 
             case ALPValidatorValidationStateValid:
                 
-                if (blockSelf.validChangeBlock) {
+                if (blockSelf.MY_validChangeBlock) {
                     // do happy things
-                    blockSelf.validChangeBlock(self,YES,blockValidator);
+                    blockSelf.MY_validChangeBlock(self,YES,blockValidator);
                 }
                 
                 break;
                 
             case ALPValidatorValidationStateInvalid:
                 
-                if (blockSelf.invalidChangeBlock) {
+                if (blockSelf.MY_invalidChangeBlock) {
                     // do unhappy things
-                    blockSelf.invalidChangeBlock(self,NO,blockValidator);
+                    blockSelf.MY_invalidChangeBlock(self,NO,blockValidator);
                 }
                 
                 break;
                 
             case ALPValidatorValidationStateWaitingForRemote:
                 
-                if (blockSelf.waitingForRemoteChangeBlock) {
+                if (blockSelf.MY_waitingForRemoteChangeBlock) {
                     // do loading indicator things
-                    blockSelf.waitingForRemoteChangeBlock(self,NO,blockValidator);
+                    blockSelf.MY_waitingForRemoteChangeBlock(self,NO,blockValidator);
                 }
                 
                 break;
@@ -102,10 +85,10 @@ SYNTHESIZE_ASC_PRIMITIVE(waitingForRemoteChangeBlock, setWaitingForRemoteChangeB
         [validator validate:string];
     }
     
-    NSMutableArray *validators = [self.validators mutableCopy];
+    NSMutableArray *validators = [self.MY_validators mutableCopy];
     [validators addObject:validator];
     
-    self.validators = validators;
+    self.MY_validators = validators;
 }
 
 
@@ -113,7 +96,7 @@ SYNTHESIZE_ASC_PRIMITIVE(waitingForRemoteChangeBlock, setWaitingForRemoteChangeB
 {
     NSMutableArray *invalidValidators = [NSMutableArray new];
     
-    [self.validators enumerateObjectsUsingBlock:^(ALPValidator *validator, NSUInteger idx, BOOL *stop) {
+    [self.MY_validators enumerateObjectsUsingBlock:^(ALPValidator *validator, NSUInteger idx, BOOL *stop) {
         
         if (!validator.isValid) {
             [invalidValidators addObject:validator];

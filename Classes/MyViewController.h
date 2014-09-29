@@ -6,5 +6,4 @@
 //
 //
 
-#import "MYViewControllerType.h"
 #import "UIViewController+MyViewControllerAdditions.h"

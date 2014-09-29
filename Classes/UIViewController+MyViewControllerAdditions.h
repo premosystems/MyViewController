@@ -18,13 +18,14 @@ typedef void (^MYFormValidationBlock)(id sender, BOOL isValid, NSArray *validato
 
 @interface UIViewController (MyViewControllerAdditions)
 
-@property (strong, nonatomic) NSMutableArray *validators;
+@property (strong, nonatomic) NSMutableArray *MY_validators;
 @property (nonatomic) BOOL isValid;
-@property (nonatomic,strong) APLKeyboardControls *keyboardControls;
-@property (nonatomic,copy) MYValidationChangedBlock validChangeBlock;
-@property (nonatomic,copy) MYValidationChangedBlock invalidChangeBlock;
-@property (nonatomic,copy) MYValidationChangedBlock waitingForRemoteChangeBlock;
+@property (nonatomic,strong) APLKeyboardControls *MY_keyboardControls;
+@property (nonatomic,copy) MYValidationChangedBlock MY_validChangeBlock;
+@property (nonatomic,copy) MYValidationChangedBlock MY_invalidChangeBlock;
+@property (nonatomic,copy) MYValidationChangedBlock MY_waitingForRemoteChangeBlock;
 
+- (void) MY_viewControllerSetup;
 - (NSArray*) invalidValidators;
 - (BOOL) formIsValid;
 - (void) addValidator:(ALPValidator*)validator forControl:(UIControl*)control;

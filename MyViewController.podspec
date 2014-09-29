@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
     #
     
     s.name         = "MyViewController"
-    s.version      = "0.0.2"
+    s.version      = "0.0.3"
     s.summary      = "Helpful additions for common view controller features. "
     
     s.description  = <<-DESC
