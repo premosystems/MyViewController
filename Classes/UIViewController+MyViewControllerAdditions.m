@@ -126,21 +126,24 @@ SYNTHESIZE_ASC_PRIMITIVE(MY_waitingForRemoteChangeBlock, setMY_waitingForRemoteC
 {
     [self validateWithCompletion:^(id sender, BOOL success, NSArray *invalidValidators) {
         
-        ALPValidator *validator = invalidValidators[0];
-        
-        NSString *errorMessage = _.array(validator.errorMessages).reduce(@"",^(NSString *x, NSString *y) {
-            if (x.length > 0) {
-                return [NSString stringWithFormat:@"%@\n%@",x,y];
-            } else {
-                return y;
-            }
+        if (!success) {
+            ALPValidator *validator = invalidValidators[0];
             
-        });
+            NSString *errorMessage = _.array(validator.errorMessages).reduce(@"",^(NSString *x, NSString *y) {
+                if (x.length > 0) {
+                    return [NSString stringWithFormat:@"%@\n%@",x,y];
+                } else {
+                    return y;
+                }
+                
+            });
+            
+            [[TWMessageBarManager sharedInstance] showMessageWithTitle:@"Error" description:errorMessage type:TWMessageBarMessageTypeError duration:2.0];
+        }
         
-        [[TWMessageBarManager sharedInstance] showMessageWithTitle:@"Error" description:errorMessage type:TWMessageBarMessageTypeError duration:2.0];
         
         if (completionBlock) {
-            completionBlock(self,invalidValidators.count == 0,invalidValidators);
+            completionBlock(self,success,invalidValidators);
         }
 
         
